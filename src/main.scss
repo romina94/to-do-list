@@ -1,0 +1,160 @@
+//Variables
+$screen-xs-max: 767px;
+$font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+$red: #AA2222;
+$light-gray: #DDD;
+$border-color: #5D5D5D;
+$disabled-color: #333;
+$todo-background-color: #292929;
+$background-color: #242424;
+$input-background-color: #1A1A1A;
+
+:root {
+  font-family: $font-family;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: $background-color;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+
+  main {
+    align-self: stretch;
+
+    .kanban-wrapper {
+      max-width: 1200px;
+      margin: auto;
+
+      form {
+        display: grid;
+        gap: 10px;
+        align-items: center;
+        width: 40%;
+        margin: auto;
+
+        @media (max-width: $screen-xs-max) {
+          display: flex;
+          flex-flow: column;
+          width: 98%;
+        }
+
+        input {
+          grid-row: 1;
+          grid-column: 1;
+        }
+
+        textarea {
+          grid-row: 2;
+          grid-column: 1;
+          resize: vertical;
+        }
+
+        input,
+        textarea {
+          background-color: $input-background-color;
+          color: $light-gray;
+          font-size: 1em;
+          font-family: $font-family;
+          border: 1px solid $border-color;
+          border-radius: 8px;
+          outline: 0;
+          padding: 5px 10px 8px;
+
+          @media (max-width: $screen-xs-max) {
+            width: 95%;
+          }
+
+          &::placeholder {
+            font-family: $font-family;
+            font-size: 1em;
+          }
+        }
+
+        button {
+          grid-row: 1 / span 2;
+          grid-column: 2;
+          height: fit-content;
+          padding: 10px;
+
+          &:disabled {
+            cursor: unset;
+            color: $disabled-color;
+            transform: none;
+          }
+        }
+      }
+
+      .kanban {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        gap: 10px;
+        margin: 20px 5px;
+
+        @media (max-width: $screen-xs-max) {
+          grid-auto-flow: row;
+        }
+
+        .todo-wrapper,
+        .in-progress-wrapper,
+        .done-wrapper {
+          background-color: $disabled-color;
+          border: 2px solid $border-color;
+          border-radius: 15px;
+          padding-bottom: 15px;
+
+          h2 {
+            margin: 30px 15px;
+          }
+
+          .task {
+            background-color: $todo-background-color;
+            padding: 5px 15px;
+
+            h4 {
+              color: $light-gray;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+
+      button {
+        cursor: pointer;
+        background-color: $input-background-color;
+        display: block;
+        color: inherit;
+        font-size: 1.1em;
+        border: 0;
+        border-radius: 5px;
+        outline: 0;
+        padding: 8px;
+        margin: 0 auto 10px;
+        width: 100%;
+        transition: transform 0.3s ease-out;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        &.delete {
+          background-color: $red;
+        }
+      }
+    }
+  }
+}
